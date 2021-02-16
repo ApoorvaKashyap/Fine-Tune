@@ -1,4 +1,4 @@
-run="python './Lab 6/DistancePlotter.py'"
+run="python './main.py'"
 language="python3"
 onBoot="echo Booting up!"
 

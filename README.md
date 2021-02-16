@@ -8,6 +8,7 @@
 ***Type: Mini Project***
 
 ---
+## Instructions
 
 The PRL course has a mini project component. A mini project will be a moderate-sized python application that performs some useful task. It has to be implemented in a team of up to five students.
 
@@ -21,20 +22,24 @@ The PRL course has a mini project component. A mini project will be a moderate-s
 
 ## Chosen Project: Web Based MP3 Player
 
-The Music Player will be developed from scratch using Python. It will be web-based, i.e., it will have a  web server which will have music stored in mp3 format. The player will search for a music track on demand and then play the music track if found. Otherwise, it will ask the user if they want to add the music track to the server.
+The Music Player will be developed from scratch using Python. It will be web-based, i.e., it will have a  web server fropm where music will be downloaded and adde to the app's playlist. The player will search for a music track on demand and then play the music track if found. Otherwise, it download the track from the server.
+
+Server: 
 
 ### Functionalities
 
-1. Play a track already stored in server.
-2. Ask whether the user wants to add the track to the server, if the demanded track is unavailable.
-3. Have the Play/Pause, Fast Forward and Skip Buttons.
-4. Allow the creation, modification and deletion of a playlist.
+1. Play a track already downloaded through the app.
+2. If the demanded track is unavailable, then download it from the server.
+3. Have the Play/Pause, Forward Seek and Backward Seek Buttons.
 
 ### Libraries Used
 
 1. OS - To work with directories and filesystems.
-2. PyTube - To access songs from the internet.
+2. PyTube - To access songs from Youtube.
 3. URLLib - To access the html codes of webpages.
 4. Re - To find the matching expressions in the search results.
+5. MoviePy - To convert the downloaded file into .mp3 format.
+6. PyGame - To control the Music Playback.
+7. PIL - To insert image into Tkinter Labels
 
 ` P.S. - The App is still in development.The privacy of users is not an important priority at this stage. `
