@@ -4,7 +4,7 @@ from tkinter.ttk import *
 from PIL import Image, ImageTk
 from modules.handleTracks import *
 from tkinter import messagebox
-import os 
+import os
 import pygame
 from modules.songList import *
 
@@ -28,11 +28,12 @@ songName='Name'
 publisher='Publisher'
 pubDate='Release Date'
 yurl='Youtube ID'
+duration='Duration'
 
 #Initializing the Mixer
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.set_volume(float(0))
+pygame.mixer.music.set_volume(float(25))
 updateLst()
 
 
@@ -45,6 +46,8 @@ song = os.listdir(path)
 for i in song:
   songlist.insert(tk.END, i)
 
+track_duration = 0
+
 '''Defining the functions of the music player'''
 #Stop the Music
 def stop():
@@ -53,6 +56,7 @@ def stop():
 
 #Displays the Info of the Cureently Playing Song
 def infoShow(trackName):
+  global track_duration
   try:
     trackName=inputSearch(trackName)
     video_ids=urlProvider(trackName)
@@ -67,27 +71,40 @@ def infoShow(trackName):
     pub_label.config(text='{}: {}'.format(publisher, line[1]))
     date_label.config(text='{}: {}'.format(pubDate, line[2]))
     yurl_label.config(text = '{}: {}'.format(yurl, line[3]))
+    duration_label.config(text = '{}: {} s'.format(duration, line[4]))
+    track_duration = int(line[4])
 
 #Controls the Play/Pause Button
 global paused
 paused = False
 
+song = None
+
+#Tracks the current playing song and plays the new
+#if the new is not equal to the old
+def change_song(s):
+  global song
+  if song != s:
+    path = f'./music/.music-cache/{s}'
+    pygame.mixer.music.stop()
+    pygame.mixer.music.unload()
+    pygame.mixer.music.load(path)
+    pygame.mixer.music.play(loops = 0)
+    infoShow(s.replace(".mp3", ""))
+    song = s
+
 def pause(is_paused):
+  global started
   global paused
-  pos = pygame.mixer.music.get_pos()
   paused = is_paused
-  songName=songlist.get(tk.ACTIVE)
-  song = f'./music/.music-cache/{songName}'
-  pygame.mixer.music.load(song)
-  pygame.mixer.music.play(loops = 0)
   if paused:
-    pygame.mixer.music.set_pos(pos/1000)
-    pygame.mixer.music.play()
+    songName = songlist.get(tk.ACTIVE)
+    change_song(songName)
+    pygame.mixer.music.pause()
     pause_button.config(image = play_button_img)
-    infoShow(songName.replace(".mp3", ""))
     paused = False
   else:
-    pygame.mixer.music.stop()
+    pygame.mixer.music.unpause()
     pause_button.config(image = pause_button_img)
     paused = True
 
@@ -103,16 +120,24 @@ def vol_change(var):
     v_img.config(image = vol_mute)
   pygame.mixer.music.set_volume(float(x/100))
 
-def fseek():
+i = 1
 
-  pos=(pygame.mixer.music.get_pos()/1000)
-  pos+=30
-  pygame.mixer.music.set_pos(pos)
-  print(pos)
+def fseek():
+  global track_duration, i
+  if 15 * i < track_duration :
+    pygame.mixer.music.set_pos(i * 15)
+    i+=1
+  else:
+    stop()
+
 
 def bseek():
-  pygame.mixer.music.set_pos((pygame.mixer.music.get_pos()-30000)/1000)
-  print('bseek')
+  global track_duration, i
+  if 15 * (i-1) >= 0 :
+    i-=1
+    pygame.mixer.music.set_pos(i * 15)
+  else:
+    stop()
 
 def onSearch():
   result=onSearchSubmit(search_term.get())
@@ -154,6 +179,8 @@ date_label = tk.Label(root, text="{}: {}".format(pubDate,default), font = ('Time
 date_label.place(x=300, y=155)
 yurl_label = tk.Label(root, text="{}: {}".format(yurl,default), font = ('Times', 12), foreground = '#ffffff', background='#50544f')
 yurl_label.place(x=300, y=185)
+duration_label = tk.Label(root, text="{}: {}".format(duration,default), font = ('Times', 12), foreground = '#ffffff', background='#50544f')
+duration_label.place(x=300, y=215)
 
 #Making the Search Bar
 search_term = tk.StringVar()
@@ -163,8 +190,8 @@ searchButton = tk.Button(root, text='Search..', width=100, command=onSearch)
 searchButton.place(x=725, y=5, height=30, width=100)
 
 #Making the controls images
-play_button_img = tk.PhotoImage(file='./imgs/icons/pause.png')
-pause_button_img = tk.PhotoImage(file='./imgs/icons/play.png')
+play_button_img = tk.PhotoImage(file='./imgs/icons/play.png')
+pause_button_img = tk.PhotoImage(file='./imgs/icons/pause.png')
 stop_button_img = tk.PhotoImage(file='./imgs/icons/stop.png')
 fskip_button_img = tk.PhotoImage(file='./imgs/icons/skip-forward.png')
 bskip_button_img = tk.PhotoImage(file='./imgs/icons/skip-back.png')
@@ -190,6 +217,7 @@ v_img.place(x=17, y=428)
 volume_scale = tk.Scale(root,from_=0, to=100, orient = tk.HORIZONTAL, command = vol_change, bg="#50544f")
 volume_scale.place(x = 60, y =425, width=500 )
 lvar = tk.IntVar()
+volume_scale.set(25)
 
 #Adding Quit Button and Refresh Button using right click 
 def refresh():
@@ -198,7 +226,7 @@ def refresh():
   songlist.delete(0, tk.END)
   for i in song:
     songlist.insert(tk.END, i)
-  #songlist.insert(tk.END, song[-1])
+  updateLst()
   
 rMenu = tk.Menu(root, tearoff = 0)
 

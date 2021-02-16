@@ -1,4 +1,5 @@
 import urllib.request
+import string
 import re
 from pytube import YouTube
 import moviepy.editor as mp
@@ -10,20 +11,22 @@ def lstIncrement(yurl):
     global trackList
     trackList.append(yurl)
 def updateLst():
-    tracklist=os.listdir('./music/db/')
+    global trackList
+    trackList=os.listdir('./music/db/')
     for i in range(len(trackList)):
         trackList[i] = trackList[i].replace(".dat", "")
         print("Updated!!")
         
 #A Class to Handle the Music Files Details
 class tracks:
-    def __init__(self, name, pub, year, yurl, coverart = '.\imgs\coverart.jpg'):
+    def __init__(self, name, pub, year, yurl, duration, coverart = '.\imgs\coverart.jpg'):
         self.name = name
         self.pub = pub
         self.year = year
         self.yurl = yurl
+        self.duration = duration
         self.coverart = coverart
-    
+        
     #Saving the Details of the Downloaded Track to a File to be read later.
     def save(self):
         try:
@@ -32,6 +35,7 @@ class tracks:
                 mT.write(str(self.pub)+"|")
                 mT.write(str(self.year)+"|")
                 mT.write(str(self.yurl)+"|")
+                mT.write(str(self.duration)+"|")
                 mT.write(str(self.coverart))
         except Exception as e:
             print(e)
@@ -61,10 +65,22 @@ def download(track):
             ytVid.prefetch()
             Streams = ytVid.streams.filter(only_audio=True).first()
             Streams.download('./music/.music-cache')
-            clip = mp.AudioFileClip('./music/.music-cache/{}.mp4'.format(ytVid.title))
-            clip.write_audiofile('./music/.music-cache/{}.mp3'.format(ytVid.title)) 
-            os.remove('./music/.music-cache/{}.mp4'.format(ytVid.title))
-            track1 = tracks(ytVid.title, ytVid.author, ytVid.publish_date, video_ids[0])
+            title = str(ytVid.title)
+            badchars = [".", "/"]
+            t = str(ytVid.title)
+            for i in badchars:
+                t = t.replace(i, "")
+            
+            badchars = [".", "(", ")", "{", "}", "[", "]", "*", "/", "\\"]
+            title = str(ytVid.title)
+            for i in badchars:
+                title = title.replace(i, "")
+            os.rename('./music/.music-cache/{}.mp4'.format(t),'./music/.music-cache/{}.mp4'.format(title))
+            print(title)
+            clip = mp.AudioFileClip('./music/.music-cache/{}.mp4'.format(title))
+            clip.write_audiofile('./music/.music-cache/{}.mp3'.format(title)) 
+            os.remove('./music/.music-cache/{}.mp4'.format(title))
+            track1 = tracks(title, ytVid.author, ytVid.publish_date, video_ids[0], ytVid.length)
             lstIncrement(video_ids[0])
             track1.save()
         else: 
@@ -77,12 +93,14 @@ def download(track):
 
 #Searches for Required Music Track in the Already Downloaded Tracks
 def musicSearch(track):
+    global trackList
     video_ids = urlProvider(track)
-    url = video_ids[0]
+    url = str(video_ids[0])
     print(url)
     print(trackList)
     for i in range(len(trackList)):
-        if url == trackList:
+        if url == trackList[i]:
+            print(url, trackList[i])
             return 1
     return 0
 
