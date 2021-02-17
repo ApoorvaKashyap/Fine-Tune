@@ -10,6 +10,19 @@
 
 ---
 
+- [Web Based MP3 Player](#web-based-mp3-player)
+  - [Programming Languages Course *(BSc Programme, NRTI)*](#programming-languages-course-bsc-programme-nrti)
+    - [Professor: Amey Karkare](#professor-amey-karkare)
+  - [Instructions](#instructions)
+    - [Requirements of the Project](#requirements-of-the-project)
+  - [Chosen Project: Web Based MP3 Player](#chosen-project-web-based-mp3-player)
+    - [Functionalities](#functionalities)
+    - [Libraries Used](#libraries-used)
+  - [Group Members](#group-members)
+  - [How to Use](#how-to-use)
+
+---
+
 ## Instructions
 
 The PRL course has a mini project component. A mini project will be a moderate-sized python application that performs some useful task. It has to be implemented in a team of up to five students.
@@ -66,4 +79,4 @@ Server: [Youtube](www.youtube.com)
 ---
 The code is also hosted on [Repl.it](https://repl.it/join/wehiiasq-apoorvakashyap).
 
-` P.S. - The App is still in development.There are some known bugs in the project. `
+`P.S. - The App is still in development.There are some known bugs in the project.`
