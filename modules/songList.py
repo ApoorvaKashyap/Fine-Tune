@@ -62,18 +62,15 @@ def download(track):
         print(duration)
         if (ytVid.length/60) < 10 :
             ytVid.prefetch()
-            Streams = ytVid.streams.filter(only_audio=True).first()
-            Streams.download('./music/.music-cache')
-            title = str(ytVid.title)
-            badchars = [".", "/"]
-            t = str(ytVid.title)
-            for i in badchars:
-                t = t.replace(i, "")
-            
-            badchars = [".", "(", ")", "{", "}", "[", "]", "*", "/", "\\", "$", "'", '"', "|"]
+            badchars = [".", "(", ")", "{", "}", "[", "]", "*", "/", "\\", "$", "'", '"', "|", ":"]
             title = str(ytVid.title)
             for i in badchars:
                 title = title.replace(i, "")
+            Streams = ytVid.streams.filter(only_audio=True).first()
+            Streams.download('./music/.music-cache', filename = title)
+            t = title
+            if len(title) > 30:
+                title = title[0:30]
             os.rename('./music/.music-cache/{}.mp4'.format(t),'./music/.music-cache/{}.mp4'.format(title))
             print(title)
             clip = mp.AudioFileClip('./music/.music-cache/{}.mp4'.format(title))

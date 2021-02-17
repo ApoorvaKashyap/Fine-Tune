@@ -71,7 +71,7 @@ def infoShow(trackName):
     pub_label.config(text='{}: {}'.format(publisher, line[1]))
     date_label.config(text='{}: {}'.format(pubDate, line[2]))
     yurl_label.config(text = '{}: {}'.format(yurl, line[3]))
-    duration_label.config(text = '{}: {} s'.format(duration, line[4]))
+    duration_label.config(text = '{}: {} min {} s'.format(duration, int(int(line[4])/60), int(line[4])%60))
     track_duration = int(line[4])
 
 #Controls the Play/Pause Button

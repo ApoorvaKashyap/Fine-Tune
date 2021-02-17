@@ -85,7 +85,7 @@ To run the program, open the root folder of this bundle in the terminal and type
 1. The Input Bar at the top takes the name of the track. The Search Button beside it launches the search function. If the track is already present, it says so, else tries to download the track.
 2. The List at the right side contains a list of the already present tracks. Selecting the track and pressing the Play/Pause Button plays the track.
 3. The Volume Slider is at the bottom of the screen. It needs to be set to a certain value when the first song is run.
-4. The Forward Seek and Backward Seek button jump to the nearest multiple of 15th second in their respective directions.
+4. The Forward Seek and Backward Seek button jump to the nearest multiple of 15th second in their respective directions. If the forward or the backward button is pressed twice in the starting or the ending 15 s of the song, then the song stops.
 
 ---
 The code is also hosted on [Repl.it](https://repl.it/join/wehiiasq-apoorvakashyap).
