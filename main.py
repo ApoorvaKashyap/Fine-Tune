@@ -8,13 +8,13 @@ import os
 import pygame
 from modules.songList import *
 
-#Making a Basic Structure - Do NOT Change
+#Making a Basic Structure
 root = tk.Tk()
 root.title('TuneUp Music Player')
 photo = tk.PhotoImage(file="imgs/icons/logo.png")
 root.iconphoto(True, photo)
 
-#Making the Main Window - Do NOT Change
+#Making the Main Window
 win_width = 850
 win_height = 480
 screen_width = root.winfo_screenwidth()
@@ -54,7 +54,7 @@ def stop():
   pygame.mixer.music.stop()
   songlist.selection_clear(tk.ACTIVE)
 
-#Displays the Info of the Cureently Playing Song
+#Displays the Info of the Currently Playing Song
 def infoShow(trackName):
   global track_duration
   try:
@@ -79,11 +79,12 @@ global paused
 paused = False
 
 song = None
+cnt = 1
 
-#Tracks the current playing song and plays the new
-#if the new is not equal to the old
+#Tracks the current playing song and plays the new song if the new is not equal to the old
 def change_song(s):
   global song
+  global cnt
   if song != s:
     path = f'./music/.music-cache/{s}'
     pygame.mixer.music.stop()
@@ -92,6 +93,7 @@ def change_song(s):
     pygame.mixer.music.play(loops = 0)
     infoShow(s.replace(".mp3", ""))
     song = s
+    cnt = 1
 
 def pause(is_paused):
   global started
@@ -120,22 +122,20 @@ def vol_change(var):
     v_img.config(image = vol_mute)
   pygame.mixer.music.set_volume(float(x/100))
 
-i = 1
-
 def fseek():
-  global track_duration, i
-  if 15 * i < track_duration :
-    pygame.mixer.music.set_pos(i * 15)
-    i+=1
+  global track_duration, cnt
+  if 15 * cnt < track_duration :
+    pygame.mixer.music.set_pos(cnt * 15)
+    cnt += 1
   else:
     stop()
 
 
 def bseek():
-  global track_duration, i
-  if 15 * (i-1) >= 0 :
-    i-=1
-    pygame.mixer.music.set_pos(i * 15)
+  global track_duration, cnt
+  if 15 * (cnt-1) >= 0 :
+    cnt -= 1
+    pygame.mixer.music.set_pos(cnt * 15)
   else:
     stop()
 
