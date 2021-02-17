@@ -71,7 +71,7 @@ def download(track):
             for i in badchars:
                 t = t.replace(i, "")
             
-            badchars = [".", "(", ")", "{", "}", "[", "]", "*", "/", "\\"]
+            badchars = [".", "(", ")", "{", "}", "[", "]", "*", "/", "\\", "$", "'", '"', "|"]
             title = str(ytVid.title)
             for i in badchars:
                 title = title.replace(i, "")
