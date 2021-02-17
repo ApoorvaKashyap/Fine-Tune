@@ -71,6 +71,15 @@ Server: [Youtube](www.youtube.com)
 
 ## How to Use
 
+To run the program, open the root folder of this bundle in the terminal and type the following command:
+`python main.py`
+
+### Prerequisites
+
+1. Python 3 should be preinstalled and added to the path.
+
+### Controls
+
 1. The Input Bar at the top takes the name of the track. The Search Button beside it launches the search function. If the track is already present, it says so, else tries to download the track.
 2. The List at the right side contains a list of the already present tracks. Selecting the track and pressing the Play/Pause Button plays the track.
 3. The Volume Slider is at the bottom of the screen. It needs to be set to a certain value when the first song is run.
