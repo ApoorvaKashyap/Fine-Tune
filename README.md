@@ -10,6 +10,21 @@
 
 ---
 
+- [Web Based MP3 Player](#web-based-mp3-player)
+  - [Programming Languages Course *(BSc Programme, NRTI)*](#programming-languages-course-bsc-programme-nrti)
+    - [Professor: Amey Karkare](#professor-amey-karkare)
+  - [Instructions](#instructions)
+    - [Requirements of the Project](#requirements-of-the-project)
+  - [Chosen Project: Web Based MP3 Player](#chosen-project-web-based-mp3-player)
+    - [Functionalities](#functionalities)
+    - [Libraries Used](#libraries-used)
+  - [Group Members](#group-members)
+  - [How to Use](#how-to-use)
+    - [Prerequisites](#prerequisites)
+    - [The Controls](#the-controls)
+
+---
+
 ## Instructions
 
 The PRL course has a mini project component. A mini project will be a moderate-sized python application that performs some useful task. It has to be implemented in a team of up to five students.
@@ -26,7 +41,7 @@ The PRL course has a mini project component. A mini project will be a moderate-s
 
 The Music Player will be developed from scratch using Python. It will be web-based, i.e., it will have a  web server fropm where music will be downloaded and adde to the app's playlist. The player will search for a music track on demand and then play the music track if found. Otherwise, it downloads the track from the server.
 
-Server: [Youtube](www.youtube.com) 
+Server: [Youtube](www.youtube.com)
 
 ### Functionalities
 
@@ -58,6 +73,15 @@ Server: [Youtube](www.youtube.com)
 
 ## How to Use
 
+To run the program, open the root folder of this bundle in the terminal and type the following command:
+`python main.py`
+
+### Prerequisites
+
+1.Python 3 should be preinstalled and added to the path.
+
+### The Controls
+
 1. The Input Bar at the top takes the name of the track. The Search Button beside it launches the search function. If the track is already present, it says so, else tries to download the track.
 2. The List at the right side contains a list of the already present tracks. Selecting the track and pressing the Play/Pause Button plays the track.
 3. The Volume Slider is at the bottom of the screen. It needs to be set to a certain value when the first song is run.
@@ -66,4 +90,4 @@ Server: [Youtube](www.youtube.com)
 ---
 The code is also hosted on [Repl.it](https://repl.it/join/wehiiasq-apoorvakashyap).
 
-` P.S. - The App is still in development.There are some known bugs in the project. `
+`P.S. - The App is still in development.There are some known bugs in the project.`
