@@ -65,9 +65,9 @@ Server: [Youtube](www.youtube.com)
 
 1. Apoorva Kashyap ***(191023)***
 2. Keshav Swami ***(191046)***
-3. Tarun Yadav ***(191076)***
-4. Sahil Kaushal ***(191077)***
-5. Saksham Gaur ***(192094)***
+3. Tarun Yadav ***(192094)***
+4. Sahil Kaushal ***(191076)***
+5. Saksham Gaur ***(191077)***
 
 ---
 
@@ -78,7 +78,7 @@ To run the program, open the root folder of this bundle in the terminal and type
 
 ### Prerequisites
 
-1.Python 3 should be preinstalled and added to the path.
+1. Python 3 should be preinstalled and added to the path.
 
 ### The Controls
 

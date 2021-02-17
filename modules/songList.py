@@ -1,5 +1,4 @@
 import urllib.request
-import string
 import re
 from pytube import YouTube
 import moviepy.editor as mp
