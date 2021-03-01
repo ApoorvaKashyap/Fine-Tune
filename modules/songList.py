@@ -4,13 +4,34 @@ from pytube import YouTube
 import moviepy.editor as mp
 import os
 
-#Create a list of downloaded music
+#Create a list of downloaded music and update it on start
 trackList = []
 def lstIncrement(yurl):
     global trackList
     trackList.append(yurl)
+
+def findTracks():
+    tempLst = os.listdir('./music/.music-cache')
+    for i in range(len(tempLst)):
+        tempLst[i] = inputSearch(tempLst[i])
+        video_id = urlProvider(tempLst[i])
+        url = 'www.youtube.com/watch?v={}'.format(video_id)
+        try:
+            ytVid = YouTube(url, on_progress_callback=tracks.progress_function)
+            badchars = [".", "(", ")", "{", "}", "[", "]","*", "/", "\\", "$", "'", '"', "|", ":"]
+            title = str(ytVid.title)
+            for i in badchars:
+                title = title.replace(i, "")
+            track1 = tracks(title, ytVid.author, ytVid.publish_date, video_id, ytVid.length)
+            track1.save()
+        except Exception as e:
+            print(e)
+        else:
+            print("Track Updated")
+
 def updateLst():
     global trackList
+    findTracks()
     trackList=os.listdir('./music/db/')
     for i in range(len(trackList)):
         trackList[i] = trackList[i].replace(".dat", "")
@@ -50,12 +71,12 @@ class tracks:
 def urlProvider(track):
     html = urllib.request.urlopen("https://www.youtube.com/results?search_query={}".format(track))
     video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
-    return video_ids
+    return video_ids[0]
 
 #Downloads the Required Music Track
 def download(track):
-    video_ids = urlProvider(track)
-    url = 'www.youtube.com/watch?v={}'.format(video_ids[0])
+    video_id = urlProvider(track)
+    url = 'www.youtube.com/watch?v={}'.format(video_id)
     try:
         ytVid = YouTube(url, on_progress_callback=tracks.progress_function)
         duration = str(str(int((ytVid.length / 60))) + ' minutes ' + str(int((ytVid.length % 60))) +' seconds')
@@ -76,8 +97,8 @@ def download(track):
             clip = mp.AudioFileClip('./music/.music-cache/{}.mp4'.format(title))
             clip.write_audiofile('./music/.music-cache/{}.mp3'.format(title)) 
             os.remove('./music/.music-cache/{}.mp4'.format(title))
-            track1 = tracks(title, ytVid.author, ytVid.publish_date, video_ids[0], ytVid.length)
-            lstIncrement(video_ids[0])
+            track1 = tracks(title, ytVid.author, ytVid.publish_date, video_id, ytVid.length)
+            lstIncrement(video_id)
             track1.save()
         else: 
             return 2
@@ -90,8 +111,8 @@ def download(track):
 #Searches for Required Music Track in the Already Downloaded Tracks
 def musicSearch(track):
     global trackList
-    video_ids = urlProvider(track)
-    url = str(video_ids[0])
+    video_id = urlProvider(track)
+    url = str(video_id)
     print(url)
     print(trackList)
     for i in range(len(trackList)):

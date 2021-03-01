@@ -59,8 +59,8 @@ def infoShow(trackName):
   global track_duration
   try:
     trackName=inputSearch(trackName)
-    video_ids=urlProvider(trackName)
-    url = video_ids[0]
+    video_id = urlProvider(trackName)
+    url = video_id
     with open('./music/db/{}.dat'.format(url),'r') as yfile:
       line = str(yfile.read())
   except Exception as e:
