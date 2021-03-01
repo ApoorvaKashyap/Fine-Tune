@@ -233,10 +233,17 @@ rMenu = tk.Menu(root, tearoff = 0)
 def showMenu(e):
     rMenu.post(e.x_root, e.y_root)
 
+
+def on_closing():
+    if messagebox.askokcancel("Quit", "Do you want to quit?"):
+        root.quit()
+
 rMenu.add_command(label = 'Refresh', command = refresh)
 rMenu.add_separator() 
 rMenu.add_command(label = 'Quit', command = root.quit)
 root.bind("<Button-3>", showMenu)
+root.bind('<Escape>', lambda e: root.quit())
+root.protocol("WM_DELETE_WINDOW", on_closing)
 
 #Configuring the GUI
 root.resizable(0, 0)

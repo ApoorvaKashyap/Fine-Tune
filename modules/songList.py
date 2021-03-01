@@ -16,14 +16,16 @@ def findTracks():
         tempLst[i] = inputSearch(tempLst[i])
         video_id = urlProvider(tempLst[i])
         url = 'www.youtube.com/watch?v={}'.format(video_id)
+        print('a')    
         try:
             ytVid = YouTube(url, on_progress_callback=tracks.progress_function)
             badchars = [".", "(", ")", "{", "}", "[", "]","*", "/", "\\", "$", "'", '"', "|", ":"]
             title = str(ytVid.title)
-            for i in badchars:
-                title = title.replace(i, "")
+            for j in badchars:
+                title = title.replace(j, "")
             track1 = tracks(title, ytVid.author, ytVid.publish_date, video_id, ytVid.length)
             track1.save()
+            print('b')
         except Exception as e:
             print(e)
         else:
