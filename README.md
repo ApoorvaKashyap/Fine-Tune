@@ -88,6 +88,9 @@ To run the program, open the root folder of this bundle in the terminal and type
 4. The Forward Seek and Backward Seek button jump to the nearest multiple of 15th second in their respective directions. If the forward or the backward button is pressed twice in the starting or the ending 15 s of the song, then the song stops.
 
 ---
+
 The code is also hosted on [Repl.it](https://repl.it/join/wehiiasq-apoorvakashyap).
+
+The Contribution File can be found [here](./.github/CONTRIBUTING.md).
 
 `P.S. - The App is still in development.There are some known bugs in the project.`

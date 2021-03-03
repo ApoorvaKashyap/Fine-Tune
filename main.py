@@ -236,6 +236,7 @@ def showMenu(e):
 
 def on_closing():
     if messagebox.askokcancel("Quit", "Do you want to quit?"):
+        pygame.mixer.music.unload()
         root.quit()
 
 rMenu.add_command(label = 'Refresh', command = refresh)
