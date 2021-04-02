@@ -18,7 +18,6 @@
   - [Chosen Project: Web Based MP3 Player](#chosen-project-web-based-mp3-player)
     - [Functionalities](#functionalities)
     - [Libraries Used](#libraries-used)
-  - [Group Members](#group-members)
   - [How to Use](#how-to-use)
     - [Prerequisites](#prerequisites)
     - [The Controls](#the-controls)
@@ -58,16 +57,6 @@ Server: [Youtube](www.youtube.com)
 5. MoviePy - To convert the downloaded file into .mp3 format.
 6. PyGame - To control the Music Playback.
 7. PIL - To insert image into Tkinter Labels
-
----
-
-## Group Members
-
-1. Apoorva Kashyap ***(191023)***
-2. Keshav Swami ***(191046)***
-3. Tarun Yadav ***(192094)***
-4. Sahil Kaushal ***(191076)***
-5. Saksham Gaur ***(191077)***
 
 ---
 
