@@ -56,9 +56,3 @@ To run the program, open the root folder of this bundle in the terminal and type
 4. The Forward Seek and Backward Seek button jump to the nearest multiple of 15th second in their respective directions. If the forward or the backward button is pressed twice in the starting or the ending 15 s of the song, then the song stops.
 
 ---
-## Cantribution
-The Contribution File can be found [here](./.github/CONTRIBUTING.md).
-
----
- ## License
- Licensed under GPLv3. See the LICENSE file for more details.
